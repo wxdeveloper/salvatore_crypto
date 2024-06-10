@@ -1,0 +1,30 @@
+@font-face {
+  font-family: 'ibm';
+  src: url('/IBMPlexMono-Light.ttf');
+
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: 'ibm';
+  src: url('/IBMPlexMono-SemiBold.ttf');
+
+  font-weight: 900;
+}
+
+
+:root {
+  font-family: 'ibm';
+  line-height: 1.5;
+
+  color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #111111;
+  font-size: 14px;
+  font-weight: 400;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
