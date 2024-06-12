@@ -1,10 +1,21 @@
 import uvicorn
 
+from contextlib import asynccontextmanager
+
 from fastapi import FastAPI, Depends, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 
 from dependencies import get_crypto_service
 from services import CryptoService
+from redis_CL import RedisCL
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    redis = RedisCL()
+    await redis.connect()
+    yield
+    await redis.disconnect()
+
 
 
 app = FastAPI(
