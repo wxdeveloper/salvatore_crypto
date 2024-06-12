@@ -269,7 +269,6 @@ a {
   align-items: center;
 }
 
-
 .brif-section {
   padding: 0 calc(50% - 590px);
 }
@@ -285,11 +284,9 @@ a {
   text-align: center;
 }
 
-
 .text-desc {
   color: rgb(68, 68, 68);
 }
-
 
 @media (min-width: 575.98px){
   .brif-section {
