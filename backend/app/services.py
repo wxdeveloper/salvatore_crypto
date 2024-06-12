@@ -6,5 +6,4 @@ class CryptoService:
         self.repository = repository
 
     async def get_data(self) -> List[Dict[str, Dict[str, int]]]:
-        await self.repository.result()
-        return self.repository.storage.data
+        return await self.repository.result()
