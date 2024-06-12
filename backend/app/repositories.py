@@ -3,6 +3,7 @@ import json
 import urllib
 
 from typing import Dict, List
+import urllib.parse
 from httpx import AsyncClient, HTTPStatusError
 from models import CryptoLink, Storage, Link
 from redis_CL import RedisCL
@@ -21,10 +22,10 @@ class CryptoRepository:
         self.redis = redis
 
     async def fetch_json(
-        self, 
-        client: AsyncClient, 
-        url: str
-        ) -> Dict:
+    self, 
+    client: AsyncClient, 
+    url: str
+    ) -> Dict:
         
         try:
             response = await client.get(url)
@@ -36,10 +37,10 @@ class CryptoRepository:
             return None
 
     async def fetch_height(
-        self, 
-        client: AsyncClient, 
-        link: Link
-        ) -> Dict[str, int]:
+    self, 
+    client: AsyncClient, 
+    link: Link
+    ) -> Dict[str, int]:
         
         data = await self.fetch_json(client, link.link_height)
         if not data:
@@ -48,11 +49,11 @@ class CryptoRepository:
         return {link.name: {'height': height}}
 
     async def fetch_total(
-        self, 
-        client: AsyncClient, 
-        link: Link, 
-        height: int
-        ) -> Dict[str, int]:
+    self, 
+    client: AsyncClient, 
+    link: Link, 
+    height: int
+    ) -> Dict[str, int]:
         
         next_key = None
         total_wallets = 0
@@ -81,10 +82,10 @@ class CryptoRepository:
         }
 
     async def process_link(
-        self, 
-        client: AsyncClient, 
-        link: Link
-        ) -> Dict[str, Dict[str, int]]:
+    self, 
+    client: AsyncClient, 
+    link: Link
+    ) -> Dict[str, Dict[str, int]]:
         
         height_data: Dict[str, Dict[str, int]]  = await self.fetch_height(client, link)
         if not height_data:
