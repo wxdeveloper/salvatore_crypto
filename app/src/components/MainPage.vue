@@ -1,20 +1,33 @@
 <script setup>
 import { ref, onMounted } from 'vue'
+import { useRouter } from 'vue-router';
 import axios from 'axios';
 
-const getHeight = async () => {
-  const { data } = await axios.get('https://stargaze-api.testovi.ch/cosmos/base/tendermint/v1beta1/blocks/latest')
-  return data.block.header.height
+
+const router = useRouter()
+const crypto = ref([])
+const loading = ref(true)
+
+const getInformation = async () => {
+  try {
+    const { data } = await axios.get('http://127.0.0.1:8000/fetch_data')
+    crypto.value = data
+    loading.value = false
+  } catch (e) {
+    console.log(e)
+  }
 }
 
-const height = async () => {
-  const { data } = await axios.get(`https://stargaze-api.testovi.ch/cosmos/staking/v1beta1/validators/starsvaloper1tnx3z8ke9za65v32qxhu65mav2282jru8989a6/delegations?height${await getHeight()}`)
-  console.log(data.pagination.total)
-}
+
+
 
 onMounted(() => {
-  height()
+  getInformation()
 })
+
+const stargaze = () => {
+  router.push('/stargaze')
+}
 
 
 </script>
@@ -26,11 +39,11 @@ onMounted(() => {
         <div>
           <h4>testovi.ch</h4>
         </div>
-      
+
         <div>
           <ul class="header-child-menu">
             <li class="header-child-menu-li">[main]</li>
-            <li class="header-child-menu-li">[services]</li>
+            <li class="header-child-menu-li" @click="stargaze">[services]</li>
           </ul>
         </div>
 
@@ -46,20 +59,128 @@ onMounted(() => {
       </div>
     </section>
 
-    <section>
+    <section class="grid-main" v-if="loading">
       <div class="grid-container">
-        <div class="grid-item">STAKE JACKAL</div>
-        <div class="grid-item">STAKE SHENTU</div>
-        <div class="grid-item">123</div>  
-        <div class="grid-item">3</div>
-        <div class="grid-item"></div>
-        <div class="grid-item"></div>  
-        <div class="grid-item"></div>
-        <div class="grid-item"></div>
-        <div class="grid-item"></div>  
+        
+      
+        <div class="grid-item">
+          <div class="main-content-mom">
+            <div class="main-content">
+              <Skeletor circle size="150"/>
+              <div class="main-content-child">
+                <Skeletor width="100"/>
+                <div class="information">
+                  <p><Skeletor width="130"/></p>
+                  <p><Skeletor width="150"/></p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid-item">
+          <div class="main-content-mom">
+            <div class="main-content">
+              <Skeletor circle size="150"/>
+              <div class="main-content-child">
+                <Skeletor width="100"/>
+                <div class="information">
+                  <p><Skeletor width="130"/></p>
+                  <p><Skeletor width="150"/></p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid-item">
+          <div class="main-content-mom">
+            <div class="main-content">
+              <Skeletor circle size="150"/>
+              <div class="main-content-child">
+                <Skeletor width="100"/>
+                <div class="information">
+                  <p><Skeletor width="130"/></p>
+                  <p><Skeletor width="150"/></p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid-item">
+          <div class="main-content-mom">
+            <div class="main-content">
+              <Skeletor circle size="150"/>
+              <div class="main-content-child">
+                <Skeletor width="100"/>
+                <div class="information">
+                  <p><Skeletor width="130"/></p>
+                  <p><Skeletor width="150"/></p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="grid-item">
+          <div class="main-content-mom">
+            <div class="main-content">
+              <Skeletor circle size="150"/>
+              <div class="main-content-child">
+                <Skeletor width="100"/>
+                <div class="information">
+                  <p><Skeletor width="130"/></p>
+                  <p><Skeletor width="150"/></p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid-item">
+          <div class="main-content-mom">
+            <div class="main-content">
+              <Skeletor circle size="150"/>
+              <div class="main-content-child">
+                <Skeletor width="100"/>
+                <div class="information">
+                  <p><Skeletor width="130"/></p>
+                  <p><Skeletor width="150"/></p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
 
+
+    <section class="grid-main" v-else>
+      <div class="grid-container">
+        
+
+        <div v-for="items in crypto" :key="items.id">
+            <div class="grid-item" v-for="item in items" :key="item.id">
+              <a :href="item.link" target="_blank">
+                <div class="main-content-mom">
+                  <div class="main-content">
+                    <img src="/comdex.png" alt="">
+                    <div class="main-content-child">
+                      <span class="main-content-title">{{ item.img }}</span>
+                      <div class="information">
+                        <p>amount: {{ item.amount }}</p>
+                        <p>total staking: {{ item.total }}</p>
+                      </div>
+                    </div>
+                  </div>
+              </div>
+              </a>
+            </div>
+        </div>
+
+      </div>
+    </section>
   </div>
 </template>
 
@@ -67,6 +188,51 @@ onMounted(() => {
 header {
   border-bottom: 1px solid gray;
   overflow-x: hidden;
+}
+
+a {
+  text-decoration: none;
+  color: white;
+}
+
+.vue-skeletor {
+  background-color: #2d2d2d;
+}
+
+.main-circle {
+  text-align: center;
+}
+
+.grid-main {
+  margin-top: 100px;
+}
+
+.tt-center {
+  text-align: center;
+}
+
+.main-content-mom {
+  padding: 15px;
+  border-radius: 10px;
+  border: 1px solid transparent;
+  transition: all 0.15s ease-in;
+}
+
+.main-content-title{
+  font-weight: 900;
+}
+
+.main-content-mom:hover {
+  border: 1px solid rgb(81, 81, 81);
+}
+
+.main-content {
+  display: flex;
+  text-align: left;
+}
+
+.main-content-child {
+  margin-left: 20px;
 }
 
 .text-main {
@@ -116,8 +282,12 @@ header {
 }
 
 .grid-item {
-  padding: 20px;
   text-align: center;
+}
+
+
+.text-desc {
+  color: rgb(68, 68, 68);
 }
 
 

@@ -1,11 +1,11 @@
 <script setup>
-import HelloWorld from './components/MainPage.vue'
+// import HelloWorld from './components/MainPage.vue'
+import { RouterView } from 'vue-router';
 </script>
 
 <template>
-  <HelloWorld/>
+  <RouterView />
 </template>
 
 <style scoped>
-
 </style>
