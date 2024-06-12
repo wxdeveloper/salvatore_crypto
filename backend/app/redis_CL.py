@@ -1,19 +1,20 @@
-import aioredis
-
-from aioredis import Redis
+from redis.asyncio import Redis as aioredis
 
 
 class RedisCL:
     def __init__(self) -> None:
-        self.url = 'redis'
-        self._client:Redis = None
+        self.url = 'redis://salvatore_crypto-redis-1:6379'
+        self._client:aioredis = None
     
+    @property
+    def client(self):
+        return self._client
+
     async def connect(self):
         self._client = await aioredis.from_url(self.url)
 
     async def disconnect(self):
         await self._client.close()
 
-    @property
-    def client(self) -> Redis:
-        return self._client
+
+redis = RedisCL()

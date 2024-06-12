@@ -1,27 +1,24 @@
-import uvicorn
-
 from contextlib import asynccontextmanager
 
 from fastapi import FastAPI, Depends, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
+import uvicorn
 
 from dependencies import get_crypto_service
 from services import CryptoService
-from redis_CL import RedisCL
+from redis_CL import redis
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    redis = RedisCL()
     await redis.connect()
     yield
     await redis.disconnect()
-
-
 
 app = FastAPI(
     title='testovich API',
     version='0.0.1',
     description='get all crypto',
+    lifespan=lifespan
 )
 
 app.add_middleware(
@@ -32,13 +29,9 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-@app.get("/fetch_data")
-async def fetch_data(crypto_service: CryptoService = Depends(get_crypto_service)):
+@app.get("/get-data", response_model=None)
+async def get_data(crypto_service: CryptoService = Depends(get_crypto_service)):
     try:
         return await crypto_service.get_data()
     except:
         HTTPException(status_code=403, detail='[Error external serve disconnect]')
-    
-    
-if __name__ == '__main__':
-    uvicorn.run('app:app', reload=True)
