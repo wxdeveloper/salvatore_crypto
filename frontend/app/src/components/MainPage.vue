@@ -2,6 +2,8 @@
 import { ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router';
 import axios from 'axios';
+import Header from './Header.vue';
+import Footer from './Footer.vue';
 
 
 const router = useRouter()
@@ -34,24 +36,7 @@ const stargaze = () => {
 
 <template>
   <div class="brif-section">
-    <header>
-      <div class="header-menu">
-        <div>
-          <h4>testovi.ch</h4>
-        </div>
-
-        <div>
-          <ul class="header-child-menu">
-            <li class="header-child-menu-li">[main]</li>
-            <li class="header-child-menu-li" @click="stargaze">[services]</li>
-          </ul>
-        </div>
-
-        <div>
-          
-        </div>
-      </div>
-    </header>
+    <Header/>
 
     <section>
       <div class="text-main">
@@ -181,15 +166,11 @@ const stargaze = () => {
 
       </div>
     </section>
+    <Footer/>
   </div>
 </template>
 
 <style scoped>
-header {
-  border-bottom: 1px solid gray;
-  overflow-x: hidden;
-}
-
 a {
   text-decoration: none;
   color: white;
@@ -237,36 +218,6 @@ a {
 
 .text-main {
   text-align: center;
-}
-
-.header-child-menu {
-  display: flex;
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.header-child-menu-li {
-  margin-right: 10px;
-  margin-left: 10px;
-  color: #dedede;
-  transition: all 0.3s ease-in-out;
-}
-
-.header-child-menu-li:last-child {
-  margin-right: 95px;
-}
-
-.header-child-menu-li:hover{
-  cursor: pointer;
-  color: white;
-  font-weight: 900;
-}
-
-.header-menu {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
 }
 
 .brif-section {
