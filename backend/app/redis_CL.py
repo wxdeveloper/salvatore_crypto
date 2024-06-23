@@ -3,7 +3,7 @@ from redis.asyncio import Redis as aioredis
 
 class RedisCL:
     def __init__(self) -> None:
-        self.url = 'redis://salvatore_crypto-redis-1:6379'
+        self.url = 'redis://redis:6379'
         self._client:aioredis = None
     
     @property
