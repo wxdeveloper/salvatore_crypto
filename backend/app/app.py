@@ -14,9 +14,8 @@ async def lifespan(app: FastAPI):
     await redis.disconnect()
 
 app = FastAPI(
-    title='testovich API',
+    title='TSTVCH API',
     version='0.0.1',
-    description='get all crypto',
     lifespan=lifespan
 )
 
