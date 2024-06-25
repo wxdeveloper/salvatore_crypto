@@ -2,7 +2,7 @@
 import { toast } from 'vue3-toastify';
 import 'vue3-toastify/dist/index.css';
 
-const test = () => {
+const toastPresent = () => {
     navigator.clipboard.writeText('tstvch');
     toast.success("Copied!", {
         autoClose: 1000,
@@ -18,7 +18,7 @@ const test = () => {
     <footer>
         <div class="footer-content">
             <p class="footer-m-r">
-                <a @click="test" target="_blank" ><v-icon name="bi-discord" scale="1.3" fill="gray" animation="wrench" speed="fast" :hover=true /></a>
+                <a @click="toastPresent" target="_blank" class="footer-a"><v-icon name="bi-discord" scale="1.3" fill="gray" animation="wrench" speed="fast" :hover=true /></a>
             </p>
             <p class="footer-m-r">
                 <a href="https://github.com/ptts55" target="_blank"><v-icon name="bi-github" scale="1.3" fill="gray" animation="wrench" speed="fast" :hover=true /></a>
@@ -45,6 +45,10 @@ footer {
     border-top: 1px solid #515151;
     background-color: #111111;
     align-items: center;
+}
+
+.footer-a {
+    cursor: pointer;
 }
 
 .footer-m-r {

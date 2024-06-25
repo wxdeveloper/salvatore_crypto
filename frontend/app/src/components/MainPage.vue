@@ -12,7 +12,7 @@ const loading = ref(true)
 
 const getInformation = async () => {
   try {
-    const { data } = await axios.get('http://127.0.0.1:8000/fetch_data')
+    const { data } = await axios.get('http://127.0.0.1:8000/get-data')
     crypto.value = data
     loading.value = false
   } catch (e) {
@@ -20,16 +20,9 @@ const getInformation = async () => {
   }
 }
 
-
-
-
 onMounted(() => {
   getInformation()
 })
-
-const stargaze = () => {
-  router.push('/stargaze')
-}
 
 
 </script>
@@ -169,97 +162,3 @@ const stargaze = () => {
     <Footer/>
   </div>
 </template>
-
-<style scoped>
-a {
-  text-decoration: none;
-  color: white;
-}
-
-.vue-skeletor {
-  background-color: #2d2d2d;
-}
-
-.main-circle {
-  text-align: center;
-}
-
-.grid-main {
-  margin-top: 100px;
-}
-
-.tt-center {
-  text-align: center;
-}
-
-.main-content-mom {
-  padding: 15px;
-  border-radius: 10px;
-  border: 1px solid transparent;
-  transition: all 0.15s ease-in;
-}
-
-.main-content-title{
-  font-weight: 900;
-}
-
-.main-content-mom:hover {
-  border: 1px solid rgb(81, 81, 81);
-}
-
-.main-content {
-  display: flex;
-  text-align: left;
-}
-
-.main-content-child {
-  margin-left: 20px;
-}
-
-.text-main {
-  text-align: center;
-}
-
-.brif-section {
-  padding: 0 calc(50% - 590px);
-}
-
-.grid-container {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 20px;
-  padding: 20px;
-}
-
-.grid-item {
-  text-align: center;
-}
-
-.text-desc {
-  color: rgb(68, 68, 68);
-}
-
-@media (min-width: 575.98px){
-  .brif-section {
-    padding: 0 calc(50% - 270px);
-  }
-}
-
-@media (min-width: 767.98px){
-  .brif-section {
-    padding: 0 calc(50% - 360px);
-  }
-}
-
-@media (min-width: 991.98px) {
-  .brif-section {
-    padding: 0 calc(50% - 480px);
-  }
-}
-
-@media (min-width: 1199.98px){
-  .brif-section {
-    padding: 0 calc(50% - 590px);
-  }
-}
-</style>
