@@ -1,11 +1,11 @@
 import { createRouter, createWebHistory, createMemoryHistory } from 'vue-router'
 
 import MainPage from '../components/MainPage.vue'
-import Stargaze from '../components/Stargaze.vue'
+import Services from '../components/Services.vue'
 
 const routes = [
   { path: '/', component: MainPage },
-  { path: '/stargaze', component: Stargaze}
+  { path: '/services', component: Services}
 ]
 
 const router = createRouter({
